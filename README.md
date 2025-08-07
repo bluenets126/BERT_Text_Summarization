@@ -38,15 +38,15 @@ BART
   RougeL: 40.0446
   RougeSum: 40.0453
 T5
-  Rouge1: 45.308
-  Rouge2: 20.8713
-  RougeL: 37.1073
-  RougeSum: 37.1
+  Rouge1: 45.3258
+  Rouge2: 20.899
+  RougeL: 37.1246
+  RougeSum: 37.1554
 Pegasus
-  Rouge1: 39.8465
-  Rouge2: 17.8148
-  RougeL: 33.6842
-  RougeSum: 33.6509
+  Rouge1: 42.079
+  Rouge2: 19.6021
+  RougeL: 35.585
+  RougeSum: 35.6228
 
 
 Problems/Challenges:
