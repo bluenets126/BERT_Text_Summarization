@@ -8,7 +8,7 @@ Bottom Line Up Front:
 The model is not perfect.  Especially with BERT2BERT which isn't trained for summarization.  It gets decent ROUGE scores after a few training epochs, but still human review is needed.  Even with the good ROUGE scores, the text summarization doens't always line up, and the context isn't always captured correctly.  I've noticed this especially on my model with the names being referenced in situations.  Incorrect names being used, amongst other inconsistencies.   
 
 Important Notes on Jupyter Notebook:
-I used Google Colab to run the project.  
+I used Google Colab to run the project. Towards the end to speed up training I was using A100 GPU. 
 At the end when we get to some metrics to see all rouge scores together, the models I ran earlier were saved, and then reloaded into Jupyter notebook to be used to create the final metric plot.  This will not work if the paths are not updated, or variables changed at the end.  
 
 Process:
@@ -55,7 +55,8 @@ Challenge: BERT is limited to only 512 tokens which is good for this example.  o
 Challenge: Overfitting was something to be cautious about.  One of my runs on BERT2BERT where I was using RougeL as the evaluation metric was overfitting.  Validation loss kept increasing as Training Loss kept decreasing.  But RougeL was slightly increasing so the training would not stop on the early callback.  This caused for Rouge Scores in teens and single digits on the Test Dataset.  
 
 
-
+Conclusion:
+The implementation of a chat sumamrization would be very useful for users to catch up on missed conversations.  In order to accomplish this with BERT2BERT, conversations would need to be segmented if longer than 512 tokens in length as BERT is capped at 512 tokens.  BART would be the best implementation for this as it is the most accurate so far.  However, there would still need to be human review on chat summarizations as not all summarizations are captured in the context of the conversations correctly.  It is missing some key pieces (i.e. referring to the incorrect person in chats at incorrect times, not summarizing who is doing what correctly).  The model would benefit from more training data that it could learn on and the model could be more fine tuned to chats and slang used in chats to help benefit the summarization task.  But overall the implementation would be a beneficial implementation to ACME communications.
 
 
 
