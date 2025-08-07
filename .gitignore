@@ -1,0 +1,77 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Colab metadata
+*.colab_metadata.json
+
+# Model files and tokenizer caches
+*.bin
+*.pt
+*.h5
+*.ckpt
+*.onnx
+*.tflite
+*.pb
+*.joblib
+*.pkl
+
+# Hugging Face cache and transformers
+.cache/
+datasets/
+*.jsonl
+*.jsonl.gz
+*.arrow
+*.lock
+*.tmp
+*.gz
+
+# Transformers training outputs
+output_dir/
+runs/
+logs/
+checkpoints/
+saved_models/
+*.ckpt
+*.ts
+
+# Environment files
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Notebook render artifacts
+*.nbconvert.ipynb
+*.nb.html
+
+# Temporary files
+*.swp
+*.bak
+*.tmp
+*.old
+
+# CSVs and data dumps (optional — remove if you want to track these)
+*.csv
+*.tsv
+*.xlsx
+
+# Model evaluation outputs
+*.txt
+*.out
+*.score
+*.metrics
