@@ -10,6 +10,7 @@ The model is not perfect.  Especially with BERT2BERT which isn't trained for sum
 Important Notes on Jupyter Notebook:
 I used Google Colab to run the project. Towards the end to speed up training I was using A100 GPU. 
 At the end when we get to some metrics to see all rouge scores together, the models I ran earlier were saved, and then reloaded into Jupyter notebook to be used to create the final metric plot.  This will not work if the paths are not updated, or variables changed at the end.  
+For the models I used 512 tokens for maximum input and 128 tokens for output max length.
 
 Process:
 BERT2BERT
@@ -57,6 +58,53 @@ Challenge: Overfitting was something to be cautious about.  One of my runs on BE
 
 Conclusion:
 The implementation of a chat sumamrization would be very useful for users to catch up on missed conversations.  In order to accomplish this with BERT2BERT, conversations would need to be segmented if longer than 512 tokens in length as BERT is capped at 512 tokens.  BART would be the best implementation for this as it is the most accurate so far.  However, there would still need to be human review on chat summarizations as not all summarizations are captured in the context of the conversations correctly.  It is missing some key pieces (i.e. referring to the incorrect person in chats at incorrect times, not summarizing who is doing what correctly).  The model would benefit from more training data that it could learn on and the model could be more fine tuned to chats and slang used in chats to help benefit the summarization task.  But overall the implementation would be a beneficial implementation to ACME communications.
+
+
+Model Instructions:
+Model is saved on github, except for safetensors.  The file was too large.  To recreate the model here are the Training Arguments and Model configurations:
+
+Configurations:
+decoder_config.is_decoder = True
+decoder_configbase_model.config.decoder_start_token_id = bert_tokenizer.cls_token_id
+base_model.config.pad_token_id = bert_tokenizer.pad_token_id
+base_model.config.eos_token_id = bert_tokenizer.sep_token_id.add_cross_attention = True
+base_model.config.vocab_size = base_model.config.encoder.vocab_size
+base_model.generation_config = GenerationConfig(
+    decoder_start_token_id=bert_tokenizer.cls_token_id,
+    pad_token_id=bert_tokenizer.pad_token_id,
+    eos_token_id=bert_tokenizer.sep_token_id,
+    max_length=128,
+    no_repeat_ngram_size=3,
+    num_beams=4,
+    length_penalty=1.2
+)
+
+
+bert_training_args = Seq2SeqTrainingArguments(
+    output_dir="./checkpoints",
+    per_device_train_batch_size=16, # Batch size 16 ran successfully
+    gradient_accumulation_steps=4,
+    per_device_eval_batch_size=16,
+    num_train_epochs=15, # 15 epochs - more epochs, RougeL gets better, but model is overfitting
+    learning_rate=0.00003, # Tried 5e-5, 1e-5, 2e-5, 3e-6, 5e-6
+    warmup_steps=400,
+    lr_scheduler_type="linear", # Linear learning rate scheduler with 400 warmup steps
+    predict_with_generate=True,
+    logging_dir=None,
+    weight_decay=0.01,
+    max_grad_norm=0.9, # for stable learning
+    label_smoothing_factor=0.1, # for stable learning
+    logging_strategy="epoch",
+    save_total_limit=1,
+    eval_strategy="epoch", #evaluate after epochs
+    save_strategy="epoch",
+    load_best_model_at_end=True,
+    metric_for_best_model="eval_rougeL", # Use rougeL as evaluation metric
+    greater_is_better=True,
+    fp16=True,
+    report_to="none"
+)
+
 
 
 
