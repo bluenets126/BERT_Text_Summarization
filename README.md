@@ -60,6 +60,10 @@ Conclusion:
 The implementation of a chat sumamrization would be very useful for users to catch up on missed conversations.  In order to accomplish this with BERT2BERT, conversations would need to be segmented if longer than 512 tokens in length as BERT is capped at 512 tokens.  BART would be the best implementation for this as it is the most accurate so far.  However, there would still need to be human review on chat summarizations as not all summarizations are captured in the context of the conversations correctly.  It is missing some key pieces (i.e. referring to the incorrect person in chats at incorrect times, not summarizing who is doing what correctly).  The model would benefit from more training data that it could learn on and the model could be more fine tuned to chats and slang used in chats to help benefit the summarization task.  But overall the implementation would be a beneficial implementation to ACME communications.
 
 
+Deployment Considerations:
+Need to fill this in...
+
+
 Model Instructions:
 Model is saved on github, except for safetensors.  The file was too large.  To recreate the model here are the Training Arguments and Model configurations:
 
