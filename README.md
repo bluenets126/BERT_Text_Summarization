@@ -61,8 +61,9 @@ The implementation of a chat sumamrization would be very useful for users to cat
 
 
 Deployment Considerations:
-Need to fill this in...
-
+The model will need to be deployed as an API.  This is because of the large amount of resourses a BERT2BERT model requires.  This would not be suitable to run on the client side with limited resourses.  Any realtime summarizations would be created slower than if running with a GPU.  It also is a more secure way of keeping the model secure as users will not have direct access to the model.
+There are many ways this could be implemented in the UI.  My preferable way to implement it is with an assumption.  Assuming each message has a timestamp (which the SAMsun dataset did not), we could summarize conversations after there has been a long pause between two people talking, which could indicate the end of a message.  We could also implement an automatic summarization over a set number of user turns from speaking.  Say every 20 user turns, you could be allowed to minimize the conversation and see the summary.  Another option would be for users to be able to choose what part of the conversation they missed and just be able to choose the text that needs to be summarized and give them a summarize button that would automatically summarize the selected chat text.
+When doing the summarizations,  Personal Identifiable Information is very important and should be masked in the summarizations.  Any private data should be masked or anonymized before processing the data into a sumamrization. 
 
 Model Instructions:
 Model is saved on github, except for safetensors.  The file was too large.  To recreate the model here are the Training Arguments and Model configurations:
